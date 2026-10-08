@@ -16,7 +16,7 @@ export function CartItemRow({ line, onChangeQuantity, onRemove }: CartItemRowPro
   return (
     <div className="flex gap-4 rounded-card bg-linen p-3 shadow-soft sm:p-4">
       <Link href={`/set/${set.id}`} className="w-24 shrink-0 overflow-hidden rounded-control sm:w-32">
-        <SetCover set={set} className="h-full" />
+        <SetCover set={set} sizes="128px" className="h-full" />
       </Link>
       <div className="flex flex-1 flex-col justify-between gap-3">
         <div className="flex items-start justify-between gap-2">

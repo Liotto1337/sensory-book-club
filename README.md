@@ -35,5 +35,24 @@ types/          все TypeScript-типы
 ## Заметки
 
 - Плейлисты — встроенные публичные плейлисты Spotify, временная заглушка.
-- Обложки наборов — CSS-градиенты с эмодзи вместо фотографий.
+- Обложки наборов — фотографии с Unsplash в `public/sets/`, подключены через `next/image`; градиент набора служит подложкой, пока фото грузится.
 - Оплата имитируется: спиннер на 1,5 с → корзина очищается → `/thanks?order=SBC-XXXXXX`.
+
+## Фотографии
+
+Обложки взяты с [Unsplash](https://unsplash.com) по [лицензии Unsplash](https://unsplash.com/license): бесплатное использование, в том числе коммерческое, указывать автора не обязательно.
+
+| Набор | Автор | Источник |
+|---|---|---|
+| Тихая тоска у воды (`set-1`) | Malcolm Lightbody | [unsplash.com/photos/bBbtgyMkHb8](https://unsplash.com/photos/bBbtgyMkHb8) |
+| Тропа после дождя (`set-2`) | osborn shiloh | [unsplash.com/photos/-5YU_Dl6mQM](https://unsplash.com/photos/-5YU_Dl6mQM) |
+| Тёплый свет в окне (`set-3`) | Ana Markovych | [unsplash.com/photos/uWNxBHCCQs4](https://unsplash.com/photos/uWNxBHCCQs4) |
+| Столик у окна (`set-4`) | Toa Heftiba | [unsplash.com/photos/QnUywvDdI1o](https://unsplash.com/photos/QnUywvDdI1o) |
+| Снег за стеклом (`set-5`) | Jutta Elisabeth | [unsplash.com/photos/nUmWcosrrM0](https://unsplash.com/photos/nUmWcosrrM0) |
+| Туман над крышами (`set-6`) | Fabian Kleiser | [unsplash.com/photos/h05F6pnxedo](https://unsplash.com/photos/h05F6pnxedo) |
+| Первое тепло (`set-7`) | Christian Widell | [unsplash.com/photos/qWqj7_h0mxU](https://unsplash.com/photos/qWqj7_h0mxU) |
+| Огни после полуночи (`set-8`) | Janusz Maniak | [unsplash.com/photos/Sws6G1nFJ4E](https://unsplash.com/photos/Sws6G1nFJ4E) |
+| Пыль и позолота (`set-9`) | Svetlana Gumerova | [unsplash.com/photos/nLC10ws4vEw](https://unsplash.com/photos/nLC10ws4vEw) |
+| Воздух на высоте (`set-10`) | Gabriel Oliver | [unsplash.com/photos/ysQqP3ZO9ME](https://unsplash.com/photos/ysQqP3ZO9ME) |
+| Капли по подоконнику (`set-11`) | Brendan Sapp | [unsplash.com/photos/igf2Wko-1M8](https://unsplash.com/photos/igf2Wko-1M8) |
+| Веранда в июле (`set-12`) | Clay Banks | [unsplash.com/photos/5urBxoebDbQ](https://unsplash.com/photos/5urBxoebDbQ) |

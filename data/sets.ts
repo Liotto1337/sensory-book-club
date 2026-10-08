@@ -21,7 +21,12 @@ export const sets: SensorySet[] = [
     price: 3900,
     tags: ["sea", "summer", "evening", "salt_wood", "waves", "calm", "sadness"],
     gradient: "linear-gradient(135deg, #A9C6CF 0%, #E9D8C4 55%, #D9A88C 100%)",
-    emoji: "🌊",
+    image: {
+      src: "/sets/set-1.jpg",
+      alt: "Мокрый песок и тихое море после заката",
+      author: "Malcolm Lightbody",
+      sourceUrl: "https://unsplash.com/photos/bBbtgyMkHb8",
+    },
   },
   {
     id: "set-2",
@@ -38,7 +43,12 @@ export const sets: SensorySet[] = [
     price: 3600,
     tags: ["forest", "pine_rain", "autumn", "morning", "silence", "calm"],
     gradient: "linear-gradient(135deg, #7E9479 0%, #C9CFB4 55%, #EADFCB 100%)",
-    emoji: "🌲",
+    image: {
+      src: "/sets/set-2.jpg",
+      alt: "Тропинка в лесу, затянутом утренним туманом",
+      author: "osborn shiloh",
+      sourceUrl: "https://unsplash.com/photos/-5YU_Dl6mQM",
+    },
   },
   {
     id: "set-3",
@@ -55,7 +65,12 @@ export const sets: SensorySet[] = [
     price: 4200,
     tags: ["home", "coffee_paper", "winter", "evening", "voices", "calm"],
     gradient: "linear-gradient(135deg, #E3B38C 0%, #F2DFC8 50%, #B9826A 100%)",
-    emoji: "🛋️",
+    image: {
+      src: "/sets/set-3.jpg",
+      alt: "Стопка книг и свеча на подоконнике дождливым вечером",
+      author: "Ana Markovych",
+      sourceUrl: "https://unsplash.com/photos/uWNxBHCCQs4",
+    },
   },
   {
     id: "set-4",
@@ -72,7 +87,12 @@ export const sets: SensorySet[] = [
     price: 3700,
     tags: ["cafe", "coffee_paper", "autumn", "morning", "voices", "inspiration"],
     gradient: "linear-gradient(135deg, #8C6A55 0%, #D8BFA6 55%, #F1E6D6 100%)",
-    emoji: "☕",
+    image: {
+      src: "/sets/set-4.jpg",
+      alt: "Чашка кофе и блокнот на деревянном столике у окна",
+      author: "Toa Heftiba",
+      sourceUrl: "https://unsplash.com/photos/QnUywvDdI1o",
+    },
   },
   {
     id: "set-5",
@@ -89,7 +109,12 @@ export const sets: SensorySet[] = [
     price: 3800,
     tags: ["forest", "pine_rain", "winter", "evening", "silence", "sadness"],
     gradient: "linear-gradient(135deg, #B7C4D6 0%, #E8E6EA 55%, #C9B8C4 100%)",
-    emoji: "❄️",
+    image: {
+      src: "/sets/set-5.jpg",
+      alt: "Вид из тёмного окна на заснеженный город в синих сумерках",
+      author: "Jutta Elisabeth",
+      sourceUrl: "https://unsplash.com/photos/nUmWcosrrM0",
+    },
   },
   {
     id: "set-6",
@@ -106,7 +131,12 @@ export const sets: SensorySet[] = [
     price: 3500,
     tags: ["forest", "pine_rain", "autumn", "morning", "music", "sadness"],
     gradient: "linear-gradient(135deg, #C9A27E 0%, #E6D6C2 55%, #9DA59A 100%)",
-    emoji: "🍂",
+    image: {
+      src: "/sets/set-6.jpg",
+      alt: "Черепичные крыши в утреннем тумане",
+      author: "Fabian Kleiser",
+      sourceUrl: "https://unsplash.com/photos/h05F6pnxedo",
+    },
   },
   {
     id: "set-7",
@@ -123,7 +153,12 @@ export const sets: SensorySet[] = [
     price: 3400,
     tags: ["forest", "strawberry_grass", "spring", "day", "silence", "lightness"],
     gradient: "linear-gradient(135deg, #B9CDA0 0%, #F1E9CF 55%, #E7B7A4 100%)",
-    emoji: "🌱",
+    image: {
+      src: "/sets/set-7.jpg",
+      alt: "Ромашка в молодой траве под весенним солнцем",
+      author: "Christian Widell",
+      sourceUrl: "https://unsplash.com/photos/qWqj7_h0mxU",
+    },
   },
   {
     id: "set-8",
@@ -140,7 +175,12 @@ export const sets: SensorySet[] = [
     price: 4400,
     tags: ["cafe", "coffee_paper", "summer", "evening", "music", "inspiration"],
     gradient: "linear-gradient(135deg, #3E3550 0%, #8E6B7C 50%, #E2A983 100%)",
-    emoji: "🌃",
+    image: {
+      src: "/sets/set-8.jpg",
+      alt: "Старая городская улица ночью в свете фонарей",
+      author: "Janusz Maniak",
+      sourceUrl: "https://unsplash.com/photos/Sws6G1nFJ4E",
+    },
   },
   {
     id: "set-9",
@@ -157,7 +197,12 @@ export const sets: SensorySet[] = [
     price: 4600,
     tags: ["home", "coffee_paper", "autumn", "evening", "silence", "inspiration"],
     gradient: "linear-gradient(135deg, #6E5440 0%, #B8946A 50%, #EAD9BC 100%)",
-    emoji: "📚",
+    image: {
+      src: "/sets/set-9.jpg",
+      alt: "Старинная библиотека с высокими стеллажами и золочёным потолком",
+      author: "Svetlana Gumerova",
+      sourceUrl: "https://unsplash.com/photos/nLC10ws4vEw",
+    },
   },
   {
     id: "set-10",
@@ -174,7 +219,12 @@ export const sets: SensorySet[] = [
     price: 4900,
     tags: ["forest", "pine_rain", "winter", "morning", "silence", "calm"],
     gradient: "linear-gradient(135deg, #9FB1BF 0%, #EEF0EE 55%, #C8D3CF 100%)",
-    emoji: "🏔️",
+    image: {
+      src: "/sets/set-10.jpg",
+      alt: "Заснеженная горная деревня на рассвете",
+      author: "Gabriel Oliver",
+      sourceUrl: "https://unsplash.com/photos/ysQqP3ZO9ME",
+    },
   },
   {
     id: "set-11",
@@ -191,7 +241,12 @@ export const sets: SensorySet[] = [
     price: 3600,
     tags: ["home", "pine_rain", "autumn", "evening", "silence", "sadness"],
     gradient: "linear-gradient(135deg, #8D9AA3 0%, #D5D2CC 55%, #B5A497 100%)",
-    emoji: "🌧️",
+    image: {
+      src: "/sets/set-11.jpg",
+      alt: "Кружка на подоконнике, за стеклом капли дождя",
+      author: "Brendan Sapp",
+      sourceUrl: "https://unsplash.com/photos/igf2Wko-1M8",
+    },
   },
   {
     id: "set-12",
@@ -208,6 +263,11 @@ export const sets: SensorySet[] = [
     price: 3300,
     tags: ["home", "strawberry_grass", "summer", "day", "voices", "lightness"],
     gradient: "linear-gradient(135deg, #E9B6A0 0%, #F6E7C8 55%, #A9BE8E 100%)",
-    emoji: "🍓",
+    image: {
+      src: "/sets/set-12.jpg",
+      alt: "Летняя веранда со стульями и столиком, за ней зелёный сад",
+      author: "Clay Banks",
+      sourceUrl: "https://unsplash.com/photos/5urBxoebDbQ",
+    },
   },
 ];

@@ -33,7 +33,14 @@ export interface SensorySet {
   price: number;
   tags: SensoryTag[];
   gradient: string;
-  emoji: string;
+  image: SetImage;
+}
+
+export interface SetImage {
+  src: string;
+  alt: string;
+  author: string;
+  sourceUrl: string;
 }
 
 export interface SetWithBook extends SensorySet {
