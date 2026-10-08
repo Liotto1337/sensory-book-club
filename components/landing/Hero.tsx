@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-terracotta-light blur-3xl" />
-      <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-sand blur-3xl" />
+      <div className="pointer-events-none absolute -left-24 bottom-16 h-72 w-72 rounded-full bg-sand blur-3xl" />
       <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 pb-20 pt-16 text-center sm:px-6 sm:pb-28 sm:pt-24">
         <p className="text-xs font-medium uppercase tracking-[0.3em] text-terracotta">
           Сенсорный книжный клуб

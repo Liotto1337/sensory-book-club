@@ -3,8 +3,36 @@
 @tailwind utilities;
 
 @layer base {
-  html {
+  /* Каналы RGB без rgb(), чтобы работали модификаторы прозрачности вроде bg-ink/5 */
+  :root {
+    --color-cream: 248 244 238;
+    --color-sand: 239 230 216;
+    --color-linen: 255 253 249;
+    --color-ink: 44 36 24;
+    --color-ink-soft: 92 81 68;
+    --color-ink-muted: 138 126 112;
+    --color-terracotta: 201 123 90;
+    --color-terracotta-dark: 176 102 74;
+    --color-terracotta-light: 243 222 211;
+    --shadow-soft: 0 4px 24px -8px rgb(44 36 24 / 0.12);
+    --shadow-lifted: 0 12px 40px -12px rgb(44 36 24 / 0.22);
     color-scheme: light;
+  }
+
+  /* Тёплая тёмная палитра: «dark»-оттенок терракоты здесь светлее, чтобы оставаться акцентом на тёмном фоне */
+  .dark {
+    --color-cream: 27 23 18;
+    --color-sand: 43 37 30;
+    --color-linen: 36 32 26;
+    --color-ink: 239 231 218;
+    --color-ink-soft: 201 189 173;
+    --color-ink-muted: 156 143 128;
+    --color-terracotta: 207 132 99;
+    --color-terracotta-dark: 227 165 134;
+    --color-terracotta-light: 74 47 37;
+    --shadow-soft: 0 4px 24px -8px rgb(0 0 0 / 0.5);
+    --shadow-lifted: 0 12px 40px -12px rgb(0 0 0 / 0.65);
+    color-scheme: dark;
   }
 
   body {

@@ -59,7 +59,7 @@ export function RadioCard({
       <span
         className={cn(
           "ml-auto h-5 w-5 shrink-0 rounded-full border-2 transition-all duration-300",
-          checked ? "border-terracotta bg-terracotta shadow-[inset_0_0_0_3px_#FFFDF9]" : "border-ink/20",
+          checked ? "border-terracotta bg-terracotta shadow-[inset_0_0_0_3px_rgb(var(--color-linen))]" : "border-ink/20",
         )}
         aria-hidden
       />

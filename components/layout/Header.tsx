@@ -6,6 +6,7 @@ import { BagIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 import { useHydrated } from "@/lib/useHydrated";
 import { selectCartCount, useCartStore } from "@/store/cartStore";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { href: "/catalog", label: "Каталог" },
@@ -42,6 +43,7 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          <ThemeToggle />
           <Link
             href="/cart"
             aria-label={`Корзина, товаров: ${visibleCount}`}

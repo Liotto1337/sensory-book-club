@@ -1,6 +1,10 @@
 import type { Config } from "tailwindcss";
 
+// Цвета живут в CSS-переменных (app/globals.css), чтобы тёмная тема переопределяла их в одном месте.
+const token = (name: string) => `rgb(var(--color-${name}) / <alpha-value>)`;
+
 const config: Config = {
+  darkMode: "class",
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -9,18 +13,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#F8F4EE",
-        sand: "#EFE6D8",
-        linen: "#FFFDF9",
+        cream: token("cream"),
+        sand: token("sand"),
+        linen: token("linen"),
         ink: {
-          DEFAULT: "#2C2418",
-          soft: "#5C5144",
-          muted: "#8A7E70",
+          DEFAULT: token("ink"),
+          soft: token("ink-soft"),
+          muted: token("ink-muted"),
         },
         terracotta: {
-          DEFAULT: "#C97B5A",
-          dark: "#B0664A",
-          light: "#F3DED3",
+          DEFAULT: token("terracotta"),
+          dark: token("terracotta-dark"),
+          light: token("terracotta-light"),
         },
       },
       fontFamily: {
@@ -32,8 +36,8 @@ const config: Config = {
         control: "12px",
       },
       boxShadow: {
-        soft: "0 4px 24px -8px rgba(44, 36, 24, 0.12)",
-        lifted: "0 12px 40px -12px rgba(44, 36, 24, 0.22)",
+        soft: "var(--shadow-soft)",
+        lifted: "var(--shadow-lifted)",
       },
     },
   },
