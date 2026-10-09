@@ -42,6 +42,9 @@ export function AddressInput({ value, error, onValueChange, className }: Address
           signal: controller.signal,
         });
         if (response.status === 503) {
+          if (process.env.NODE_ENV !== "production") {
+            console.warn("Подсказки адреса отключены: на сервере не задан DADATA_API_KEY (.env.local)");
+          }
           setIsDisabled(true);
           return;
         }

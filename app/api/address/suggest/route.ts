@@ -16,6 +16,11 @@ interface DadataSuggestion {
   data?: { house?: string | null };
 }
 
+const MISSING_KEY_WARNING =
+  "DADATA_API_KEY не задан — подсказки адреса отключены. " +
+  "Добавьте ключ в .env.local (см. .env.example) и перезапустите сервер.";
+let missingKeyWarned = false;
+
 /**
  * Прокси к подсказкам DaData: токен остаётся на сервере и не попадает в браузер.
  * Без DADATA_API_KEY отвечает 503, и поле адреса работает как обычное текстовое.
@@ -23,7 +28,14 @@ interface DadataSuggestion {
 export async function POST(request: Request) {
   if (!isSameOrigin(request)) return forbiddenOrigin();
   const apiKey = process.env.DADATA_API_KEY;
-  if (!apiKey) return jsonError("Подсказки адреса не настроены", 503);
+  if (!apiKey) {
+    // Один раз на процесс: иначе ключ легко потерять при клонировании и не заметить
+    if (!missingKeyWarned) {
+      console.warn(MISSING_KEY_WARNING);
+      missingKeyWarned = true;
+    }
+    return jsonError("Подсказки адреса не настроены: задайте DADATA_API_KEY", 503);
+  }
 
   const body = await readJsonObject(request);
   const query = asString(body?.query).trim();
