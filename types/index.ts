@@ -98,3 +98,34 @@ export interface Toast {
   message: string;
   variant: ToastVariant;
 }
+
+export interface SessionUser {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export interface Review {
+  id: number;
+  rating: number;
+  text: string;
+  createdAt: number;
+  updatedAt: number;
+  authorName: string;
+  isOwn: boolean;
+}
+
+export interface ReviewsSummary {
+  count: number;
+  average: number | null;
+}
+
+export interface ReviewsResponse {
+  reviews: Review[];
+  summary: ReviewsSummary;
+}
+
+export interface AddressSuggestion {
+  value: string;
+  hasHouse: boolean;
+}

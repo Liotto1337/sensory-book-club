@@ -4,11 +4,13 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 import { Spinner } from "@/components/ui/Spinner";
 import { generateOrderNumber } from "@/lib/generateOrderNumber";
 import { useCartStore } from "@/store/cartStore";
 import { useToastStore } from "@/store/toastStore";
 import type { CheckoutErrors, CheckoutFormValues, CheckoutTextField } from "@/types";
+import { AddressInput } from "./AddressInput";
 import { DeliveryOptions } from "./DeliveryOptions";
 import { validateCheckout } from "./validateCheckout";
 
@@ -62,9 +64,9 @@ export function CheckoutForm({ onSubmittingChange }: CheckoutFormProps) {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
       <div className="grid gap-4 sm:grid-cols-2">
         <Input label="Имя" name="name" autoComplete="name" placeholder="Анна" value={values.name} error={errors.name} onChange={(event) => updateField("name", event.target.value)} />
-        <Input label="Телефон" name="phone" type="tel" autoComplete="tel" placeholder="+7 900 000-00-00" value={values.phone} error={errors.phone} onChange={(event) => updateField("phone", event.target.value)} />
+        <PhoneInput label="Телефон" name="phone" value={values.phone} error={errors.phone} onValueChange={(phone) => updateField("phone", phone)} />
         <Input label="Email" name="email" type="email" autoComplete="email" placeholder="anna@example.com" value={values.email} error={errors.email} onChange={(event) => updateField("email", event.target.value)} className="sm:col-span-2" />
-        <Input label="Адрес доставки" name="address" autoComplete="street-address" placeholder="Город, улица, дом, квартира" value={values.address} error={errors.address} onChange={(event) => updateField("address", event.target.value)} className="sm:col-span-2" />
+        <AddressInput value={values.address} error={errors.address} onValueChange={(address) => updateField("address", address)} className="sm:col-span-2" />
       </div>
       <DeliveryOptions
         value={values.delivery}

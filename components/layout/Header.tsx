@@ -7,6 +7,7 @@ import { cn } from "@/lib/cn";
 import { useHydrated } from "@/lib/useHydrated";
 import { selectCartCount, useCartStore } from "@/store/cartStore";
 import { ThemeToggle } from "./ThemeToggle";
+import { UserMenu } from "./UserMenu";
 
 const navLinks = [
   { href: "/catalog", label: "Каталог" },
@@ -44,6 +45,7 @@ export function Header() {
             </Link>
           ))}
           <ThemeToggle />
+          <UserMenu />
           <Link
             href="/cart"
             aria-label={`Корзина, товаров: ${visibleCount}`}

@@ -7,6 +7,7 @@ import { SetContents } from "@/components/sets/SetContents";
 import { SetCover } from "@/components/sets/SetCover";
 import { sets } from "@/data/sets";
 import { AddToCartButton } from "@/features/cart/AddToCartButton";
+import { ReviewsSection } from "@/features/reviews/ReviewsSection";
 import { formatPrice } from "@/lib/formatPrice";
 import { getSetById } from "@/lib/sets";
 
@@ -67,6 +68,7 @@ export default function SetPage({ params }: SetPageProps) {
           </section>
         </div>
       </div>
+      <ReviewsSection setId={set.id} />
     </article>
   );
 }

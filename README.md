@@ -6,27 +6,59 @@
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
+cp .env.example .env.local   # по желанию: токен DaData для подсказок адреса
+npm run dev                  # http://localhost:3000
 ```
 
-Требуется Node.js ≥ 18.17. Прочие команды: `npm run build`, `npm start`, `npm run typecheck`.
+Требуется Node.js ≥ 18.17 (официальная сборка: для better-sqlite3 нужны готовые бинарники; сборка Node из пакетов Ubuntu их не находит). Прочие команды: `npm run build`, `npm start`, `npm run typecheck`.
+
+Переменные окружения (см. `.env.example`):
+
+- `DADATA_API_KEY` — токен [DaData](https://dadata.ru) для подсказок адреса. Без него поле адреса работает как обычное.
+- `DATABASE_PATH` — путь к файлу SQLite, по умолчанию `.data/sensory-book-club.db`. База и таблицы создаются при первом запросе.
+
+SQLite хранится в файле, поэтому нужен сервер с постоянным диском (VPS, Docker с томом). На serverless-хостингах вроде Vercel файл не сохраняется между запросами — там понадобится облачная БД.
 
 ## Стек
 
-Next.js 14 (App Router) · TypeScript (strict) · Tailwind CSS · Zustand (persist) · Framer Motion. Без бэкенда: все данные лежат в `data/`.
+Next.js 14 (App Router, Route Handlers) · TypeScript (strict) · Tailwind CSS · Zustand (persist) · Framer Motion · SQLite (better-sqlite3). Каталог наборов статический и лежит в `data/`; пользователи, сессии и отзывы — в SQLite.
 
 ## Структура
 
 ```
-app/            страницы (лендинг, test, results, catalog, set/[id], cart, checkout, thanks)
-components/     ui/ (Button, Card, Input, RadioCard, ProgressBar, Spinner, Toaster, icons),
-                layout/ (Header, Footer, PageHeading), landing/, sets/
-features/       test/ (TestFlow, matchSets), results/, catalog/ (фильтры), cart/, checkout/
+app/            страницы (лендинг, test, results, catalog, set/[id], cart, checkout, thanks, login, register)
+app/api/        auth/ (register, login, logout, me), sets/[id]/reviews, address/suggest
+components/     ui/ (Button, Card, Input, PhoneInput, RadioCard, ProgressBar, Spinner, Toaster, icons),
+                layout/ (Header, UserMenu, ThemeToggle, Footer, PageHeading), landing/, sets/
+features/       test/ (TestFlow, matchSets), results/, catalog/ (фильтры), cart/,
+                checkout/ (форма, AddressInput), auth/ (AuthForm), reviews/
 data/           books.ts, sets.ts, questions.ts
-store/          cartStore (localStorage), testStore (sessionStorage), toastStore
-lib/            форматирование цен, номер заказа, useHydrated, выборки наборов
+store/          cartStore (localStorage), testStore (sessionStorage), authStore, toastStore
+lib/            цены, номер заказа, маска телефона, валидация, тема, выборки наборов
+lib/server/     SQLite (db), пароли, сессии, ограничение попыток входа, HTTP-хелперы
 types/          все TypeScript-типы
 ```
+
+## Аккаунты и отзывы
+
+- Регистрация и вход по email и паролю (`/register`, `/login`). Пароли хешируются scrypt из `node:crypto`; сессия — случайный токен в httpOnly-cookie `sbc_session` на 30 дней, в базе хранится только его SHA-256.
+- Изменяющие запросы принимаются только со своего Origin (защита от CSRF поверх SameSite=Lax). После 5 неудачных попыток вход по email блокируется на 15 минут.
+- На странице набора авторизованный пользователь оставляет один отзыв (оценка 1–5 и текст 10–1000 символов), может изменить или удалить его.
+
+API (`app/api/`):
+
+| Метод и путь | Что делает |
+|---|---|
+| `POST /api/auth/register` | регистрация, сразу открывает сессию |
+| `POST /api/auth/login` · `POST /api/auth/logout` | вход и выход |
+| `GET /api/auth/me` | текущий пользователь или `null` |
+| `GET /api/sets/:id/reviews` | отзывы набора и средняя оценка |
+| `POST /api/sets/:id/reviews` · `DELETE …` | создать или обновить свой отзыв, удалить его |
+| `POST /api/address/suggest` | прокси к подсказкам DaData; токен остаётся на сервере |
+
+## Оформление заказа
+
+Телефон вводится по маске `+7 (XXX) XXX-XX-XX`: буквы не набираются, номер можно вставить в любом виде («8 900…», «+7900…»). Адрес подсказывает DaData; если выбрать улицу без дома, подсказки продолжаются до дома.
 
 ## Логика подбора
 

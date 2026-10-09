@@ -103,3 +103,29 @@ export function MoonIcon(props: IconProps) {
     </IconBase>
   );
 }
+
+export function UserIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4.5 20a7.5 7.5 0 0 1 15 0" />
+    </IconBase>
+  );
+}
+
+export function LogoutIcon(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3" />
+      <path d="M10 16l-4-4 4-4M6 12h10" />
+    </IconBase>
+  );
+}
+
+export function StarIcon({ filled = false, ...props }: IconProps & { filled?: boolean }) {
+  return (
+    <IconBase fill={filled ? "currentColor" : "none"} {...props}>
+      <path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5Z" />
+    </IconBase>
+  );
+}
