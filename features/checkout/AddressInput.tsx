@@ -61,16 +61,12 @@ export function AddressInput({ value, error, onValueChange, className }: Address
   }, [query, isDisabled]);
 
   const select = (suggestion: AddressSuggestion) => {
-    if (suggestion.hasHouse) {
-      onValueChange(suggestion.value);
-      setQuery(null);
-      setIsOpen(false);
-    } else {
-      // Выбрали улицу или город без дома — продолжаем подсказывать, как в виджете DaData
-      const next = `${suggestion.value} `;
-      onValueChange(next);
-      setQuery(next);
-    }
+    // Выбрали улицу или город без дома — дописываем запятую и ждём номер дома.
+    // Сразу не перезапрашиваем: DaData подсказывает дома только после первого символа номера.
+    onValueChange(suggestion.hasHouse ? suggestion.value : `${suggestion.value}, `);
+    setQuery(null);
+    setSuggestions([]);
+    setIsOpen(false);
     inputRef.current?.focus();
   };
 
