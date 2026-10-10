@@ -3,33 +3,27 @@
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { ButtonLink } from "@/components/ui/Button";
+import { Tag } from "@/components/ui/Tag";
 
 export function ThanksContent() {
   const orderNumber = useSearchParams().get("order");
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.4 }}
-      className="mx-auto flex max-w-xl flex-col items-center rounded-card bg-linen px-6 py-12 text-center shadow-soft sm:px-12"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="mx-auto flex max-w-4xl flex-col items-center text-center"
     >
-      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-terracotta-light text-3xl">
-        🕊️
-      </span>
-      <h1 className="mt-6 font-serif text-3xl leading-tight text-ink sm:text-4xl">
-        Спасибо! Мы свяжемся с вами в течение дня
+      <h1 className="display text-[clamp(64px,12vw,160px)] text-ink">
+        Спасибо <em className="whitespace-nowrap">за заказ</em>
       </h1>
-      <p className="mt-4 text-ink-soft">
-        Мы уже начали собирать ваш набор: подбираем аромат и завязываем ленту.
+      <p className="mt-6 max-w-xl text-lg text-ink-soft">
+        Мы свяжемся с вами в течение дня. Уже начали собирать ваш набор: подбираем аромат и завязываем ленту.
       </p>
-      {orderNumber && (
-        <p className="mt-8 rounded-control border border-dashed border-terracotta/40 px-6 py-3 text-sm text-ink-soft">
-          Номер заказа: <span className="font-semibold tracking-wider text-ink">{orderNumber}</span>
-        </p>
-      )}
+      {orderNumber && <Tag className="mt-8">Заказ {orderNumber}</Tag>}
       <ButtonLink href="/" size="lg" className="mt-10">
-        Вернуться на главную
+        На главную
       </ButtonLink>
     </motion.div>
   );

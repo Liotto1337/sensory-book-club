@@ -83,8 +83,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
 
   return (
     <section className="mx-auto w-full max-w-md px-4 py-12 sm:py-20">
-      <div className="rounded-card bg-linen p-6 shadow-soft sm:p-8">
-        <h1 className="font-serif text-3xl text-ink sm:text-4xl">{text.title}</h1>
+      <div className="border border-ink/15 bg-linen p-6 sm:p-8">
+        <h1 className="display text-5xl text-ink">{text.title}</h1>
         <form onSubmit={handleSubmit} noValidate className="mt-6 flex flex-col gap-4">
           {mode === "register" && (
             <Input
@@ -118,7 +118,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             onChange={(event) => updateField("password", event.target.value)}
           />
           {formError && (
-            <p role="alert" className="rounded-control bg-terracotta-light/60 px-4 py-3 text-sm text-terracotta-dark">
+            <p role="alert" className="bg-terracotta-light px-4 py-3 text-sm text-terracotta-dark">
               {formError}
             </p>
           )}
@@ -128,7 +128,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         </form>
         <p className="mt-6 text-center text-sm text-ink-muted">
           {text.switchText}{" "}
-          <Link href={switchHref} className="font-medium text-terracotta-dark hover:underline">
+          <Link href={switchHref} className="label text-terracotta-dark hover:underline">
             {text.switchLink}
           </Link>
         </p>

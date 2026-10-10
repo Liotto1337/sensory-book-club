@@ -19,9 +19,13 @@ export function CartView() {
   if (lines.length === 0) {
     return (
       <section className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6">
-        <p className="text-5xl" aria-hidden>🕯️</p>
         <PageHeading
-          title="Корзина пока пуста"
+          align="center"
+          title={
+            <>
+              Корзина пока <em>пуста</em>
+            </>
+          }
           description="Загляните в каталог или пройдите тест — мы поможем найти вашу атмосферу."
         />
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
@@ -34,7 +38,7 @@ export function CartView() {
 
   return (
     <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-      <h1 className="font-serif text-3xl text-ink sm:text-5xl">Корзина</h1>
+      <h1 className="display text-[clamp(44px,7vw,88px)] text-ink">Корзина</h1>
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px]">
         <ul className="flex flex-col gap-4">
           <AnimatePresence initial={false}>
@@ -57,14 +61,14 @@ export function CartView() {
             ))}
           </AnimatePresence>
         </ul>
-        <aside className="h-fit rounded-card bg-linen p-6 shadow-soft lg:sticky lg:top-24">
-          <div className="flex justify-between text-sm text-ink-soft">
+        <aside className="h-fit border border-ink/15 bg-linen p-6 lg:sticky lg:top-24">
+          <div className="label flex justify-between text-ink-muted">
             <span>Доставка</span>
             <span>на следующем шаге</span>
           </div>
-          <div className="mt-4 flex items-baseline justify-between border-t border-ink/5 pt-4">
+          <div className="mt-4 flex items-baseline justify-between border-t border-ink/15 pt-4">
             <span className="text-ink-soft">Итого</span>
-            <span className="font-serif text-3xl text-ink">{formatPrice(getCartTotal(lines))}</span>
+            <span className="font-display text-4xl text-ink">{formatPrice(getCartTotal(lines))}</span>
           </div>
           <ButtonLink href="/checkout" size="lg" className="mt-6 w-full">
             Оформить заказ

@@ -16,7 +16,15 @@ export function CheckoutView() {
   if (lines.length === 0 && !isSubmitting) {
     return (
       <section className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6">
-        <PageHeading title="Оформлять пока нечего" description="Добавьте хотя бы один набор в корзину." />
+        <PageHeading
+          align="center"
+          title={
+            <>
+              Оформлять пока <em>нечего</em>
+            </>
+          }
+          description="Добавьте хотя бы один набор в корзину."
+        />
         <ButtonLink href="/catalog" size="lg" className="mt-10">
           В каталог
         </ButtonLink>
@@ -26,9 +34,11 @@ export function CheckoutView() {
 
   return (
     <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-      <h1 className="font-serif text-3xl text-ink sm:text-5xl">Оформление заказа</h1>
+      <h1 className="display text-[clamp(44px,7vw,88px)] text-ink">
+        Оформление <em>заказа</em>
+      </h1>
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px]">
-        <div className="rounded-card bg-linen/60 p-5 sm:p-8">
+        <div className="border border-ink/15 bg-linen p-5 sm:p-8">
           <CheckoutForm onSubmittingChange={setIsSubmitting} />
         </div>
         {lines.length > 0 && <OrderSummary lines={lines} total={getCartTotal(lines)} />}
