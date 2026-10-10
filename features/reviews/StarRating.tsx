@@ -31,7 +31,7 @@ export function StarRatingInput({ value, onChange, error }: StarRatingInputProps
 
   return (
     <fieldset aria-describedby={error ? `${name}-error` : undefined}>
-      <legend className="text-sm font-medium text-ink-soft">Оценка</legend>
+      <legend className="label text-ink-soft">Оценка</legend>
       <div className="mt-1.5 flex gap-1" onMouseLeave={() => setHovered(0)}>
         {STARS.map((star) => (
           <label

@@ -38,11 +38,11 @@ export function Toaster() {
             transition={{ duration: 0.25 }}
             onClick={() => dismissToast(toast.id)}
             className={cn(
-              "pointer-events-auto flex w-full max-w-sm items-center gap-3 rounded-control border-l-4 bg-ink px-4 py-3 text-left text-sm text-linen shadow-lifted",
+              "pointer-events-auto flex w-full max-w-sm items-center gap-3 border-l-4 bg-ink px-4 py-3 text-left text-sm text-linen shadow-lifted",
               variantStyles[toast.variant],
             )}
           >
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-linen/10 text-xs font-bold">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center bg-linen/10 font-mono text-xs font-bold">
               {variantIcons[toast.variant]}
             </span>
             {toast.message}

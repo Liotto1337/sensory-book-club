@@ -32,7 +32,7 @@ export function CatalogView({ sets }: { sets: SetWithBook[] }) {
         <div className="flex items-center justify-between text-sm text-ink-muted">
           <span>Найдено наборов: {visibleSets.length}</span>
           {activeTags.length > 0 && (
-            <Button variant="ghost" onClick={() => setActiveTags([])} className="h-8 px-3">
+            <Button variant="ghost" size="sm" onClick={() => setActiveTags([])}>
               Сбросить
             </Button>
           )}

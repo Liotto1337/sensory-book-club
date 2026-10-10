@@ -25,11 +25,9 @@ export function RadioCard({
   return (
     <label
       className={cn(
-        "group flex cursor-pointer items-center gap-4 rounded-card border-2 bg-linen p-4 transition-all duration-300 sm:p-5",
-        "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-terracotta/40",
-        checked
-          ? "border-terracotta shadow-lifted"
-          : "border-transparent shadow-soft hover:border-terracotta/30 hover:-translate-y-0.5",
+        "group flex cursor-pointer items-center gap-4 border bg-linen p-4 transition-colors duration-300 sm:p-5",
+        "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-terracotta has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-cream",
+        checked ? "border-ink ring-1 ring-ink" : "border-ink/15 hover:border-ink/40",
         className,
       )}
     >
@@ -44,7 +42,7 @@ export function RadioCard({
       {icon && (
         <span
           className={cn(
-            "flex h-12 w-12 shrink-0 items-center justify-center rounded-control text-2xl transition-colors duration-300",
+            "flex h-12 w-12 shrink-0 items-center justify-center text-2xl transition-colors duration-300",
             checked ? "bg-terracotta-light" : "bg-sand",
           )}
           aria-hidden
@@ -58,8 +56,8 @@ export function RadioCard({
       </span>
       <span
         className={cn(
-          "ml-auto h-5 w-5 shrink-0 rounded-full border-2 transition-all duration-300",
-          checked ? "border-terracotta bg-terracotta shadow-[inset_0_0_0_3px_rgb(var(--color-linen))]" : "border-ink/20",
+          "ml-auto h-4 w-4 shrink-0 border transition-colors duration-300",
+          checked ? "border-terracotta bg-terracotta" : "border-ink/30",
         )}
         aria-hidden
       />

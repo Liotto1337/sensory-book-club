@@ -20,7 +20,7 @@ function isDeliveryMethod(value: string): value is DeliveryMethod {
 export function DeliveryOptions({ value, onChange }: DeliveryOptionsProps) {
   return (
     <fieldset>
-      <legend className="mb-3 text-sm font-medium text-ink-soft">Способ доставки</legend>
+      <legend className="label mb-3 text-ink-soft">Способ доставки</legend>
       <div className="grid gap-3">
         {deliveryOptions.map((option) => (
           <RadioCard

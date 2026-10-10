@@ -119,7 +119,8 @@ export function AddressInput({ value, error, onValueChange, className }: Address
         role="listbox"
         aria-label="Подсказки адреса"
         hidden={!showList}
-        className="absolute left-0 right-0 top-[calc(100%+4px)] z-20 overflow-hidden rounded-control border border-ink/10 bg-linen py-1 shadow-lifted"
+        data-lenis-prevent
+        className="absolute left-0 right-0 top-[calc(100%+4px)] z-20 overflow-hidden border border-ink/15 bg-linen py-1 shadow-lifted"
       >
         {suggestions.map((suggestion, index) => (
           <li

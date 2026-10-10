@@ -19,10 +19,10 @@ export function TagFilter({ options, activeTags, onToggle }: TagFilterProps) {
             aria-pressed={isActive}
             onClick={() => onToggle(tag)}
             className={cn(
-              "rounded-full border px-4 py-2 text-sm transition-all duration-200",
+              "border px-3.5 py-2 font-mono text-xs uppercase tracking-[0.12em] transition-colors duration-200",
               isActive
-                ? "border-terracotta bg-terracotta text-linen shadow-soft"
-                : "border-ink/10 bg-linen text-ink-soft hover:border-terracotta/40 hover:text-ink",
+                ? "border-ink bg-ink text-cream"
+                : "border-ink/15 bg-linen text-ink-soft hover:border-ink/40 hover:text-ink",
             )}
           >
             {label}

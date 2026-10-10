@@ -35,7 +35,7 @@ export function ReviewForm({ initialRating = 0, initialText = "", submitLabel, o
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 rounded-card bg-linen p-5 shadow-soft sm:p-6">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 border border-ink/15 bg-linen p-5 sm:p-6">
       <StarRatingInput
         value={rating}
         error={errors.rating}
@@ -45,7 +45,7 @@ export function ReviewForm({ initialRating = 0, initialText = "", submitLabel, o
         }}
       />
       <div className="flex flex-col gap-1.5">
-        <label htmlFor={textId} className="text-sm font-medium text-ink-soft">
+        <label htmlFor={textId} className="label text-ink-soft">
           Отзыв
         </label>
         <textarea
@@ -61,8 +61,8 @@ export function ReviewForm({ initialRating = 0, initialText = "", submitLabel, o
             setErrors((current) => ({ ...current, text: undefined }));
           }}
           className={cn(
-            "resize-y rounded-control border bg-linen px-4 py-3 text-ink placeholder:text-ink-muted/70 transition-colors duration-200 focus:outline-none focus:ring-2",
-            errors.text ? "border-terracotta focus:ring-terracotta/30" : "border-ink/10 focus:border-terracotta focus:ring-terracotta/20",
+            "resize-y border bg-linen px-4 py-3 text-ink placeholder:text-ink-muted/70 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-terracotta/30 focus-visible:outline-none",
+            errors.text ? "border-terracotta-dark" : "border-ink/20 focus:border-ink",
           )}
         />
         <div className="flex justify-between gap-4 text-xs">
