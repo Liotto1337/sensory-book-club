@@ -129,3 +129,13 @@ export interface AddressSuggestion {
   value: string;
   hasHouse: boolean;
 }
+
+/** Свежий отзыв для ленты на главной: без пометки «ваш», с идентификатором набора. */
+export interface LatestReview {
+  id: number;
+  setId: string;
+  rating: number;
+  text: string;
+  authorName: string;
+  createdAt: number;
+}
