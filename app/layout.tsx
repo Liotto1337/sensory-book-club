@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Golos_Text, JetBrains_Mono, Playfair_Display, Sofia_Sans_Condensed } from "next/font/google";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -7,15 +7,31 @@ import { Toaster } from "@/components/ui/Toaster";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
+// Заголовки капсом
+const sofiaSans = Sofia_Sans_Condensed({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+// Курсив для акцентного слова и названий книг
 const playfair = Playfair_Display({
   subsets: ["latin", "cyrillic"],
+  style: ["normal", "italic"],
   variable: "--font-playfair",
   display: "swap",
 });
 
-const inter = Inter({
+const golos = Golos_Text({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
+  variable: "--font-golos",
+  display: "swap",
+});
+
+// Подписи, кнопки, навигация
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -27,15 +43,15 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F8F4EE" },
-    { media: "(prefers-color-scheme: dark)", color: "#1B1712" },
+    { media: "(prefers-color-scheme: light)", color: "#F1EADC" },
+    { media: "(prefers-color-scheme: dark)", color: "#15110D" },
   ],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     // suppressHydrationWarning: класс .dark ставит themeInitScript до гидрации
-    <html lang="ru" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="ru" className={`${sofiaSans.variable} ${playfair.variable} ${golos.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>

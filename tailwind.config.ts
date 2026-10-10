@@ -26,14 +26,18 @@ const config: Config = {
           dark: token("terracotta-dark"),
           light: token("terracotta-light"),
         },
+        band: token("band"),
+        "on-band": token("on-band"),
       },
       fontFamily: {
+        display: ["var(--font-display)", "Arial Narrow", "sans-serif"],
         serif: ["var(--font-playfair)", "Georgia", "serif"],
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        sans: ["var(--font-golos)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       borderRadius: {
-        card: "16px",
-        control: "12px",
+        card: "0px",
+        control: "0px",
       },
       boxShadow: {
         soft: "var(--shadow-soft)",

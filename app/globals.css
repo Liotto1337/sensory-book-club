@@ -5,33 +5,40 @@
 @layer base {
   /* Каналы RGB без rgb(), чтобы работали модификаторы прозрачности вроде bg-ink/5 */
   :root {
-    --color-cream: 248 244 238;
-    --color-sand: 239 230 216;
-    --color-linen: 255 253 249;
-    --color-ink: 44 36 24;
-    --color-ink-soft: 92 81 68;
-    --color-ink-muted: 138 126 112;
-    --color-terracotta: 201 123 90;
-    --color-terracotta-dark: 176 102 74;
-    --color-terracotta-light: 243 222 211;
-    --shadow-soft: 0 4px 24px -8px rgb(44 36 24 / 0.12);
-    --shadow-lifted: 0 12px 40px -12px rgb(44 36 24 / 0.22);
+    --color-cream: 241 234 220;
+    --color-sand: 233 224 207;
+    --color-linen: 250 246 238;
+    --color-ink: 27 21 16;
+    --color-ink-soft: 61 51 41;
+    --color-ink-muted: 110 96 79;
+    --color-terracotta: 196 71 31;
+    --color-terracotta-dark: 169 58 23;
+    --color-terracotta-light: 242 214 200;
+    --color-band: 27 21 16;
+    --color-on-band: 241 234 220;
+    --shadow-soft: 0 4px 24px -8px rgb(27 21 16 / 0.12);
+    --shadow-lifted: 0 18px 50px -20px rgb(27 21 16 / 0.35);
+    --grain-opacity: 0.06;
     color-scheme: light;
   }
 
-  /* Тёплая тёмная палитра: «dark»-оттенок терракоты здесь светлее, чтобы оставаться акцентом на тёмном фоне */
+  /* Тёплая тёмная палитра: «dark»-оттенок терракоты здесь светлее, чтобы оставаться акцентом на тёмном фоне,
+     а полоса-призыв из чёрной становится терракотовой */
   .dark {
-    --color-cream: 27 23 18;
-    --color-sand: 43 37 30;
-    --color-linen: 36 32 26;
-    --color-ink: 239 231 218;
-    --color-ink-soft: 201 189 173;
-    --color-ink-muted: 156 143 128;
-    --color-terracotta: 207 132 99;
-    --color-terracotta-dark: 227 165 134;
-    --color-terracotta-light: 74 47 37;
+    --color-cream: 21 17 13;
+    --color-sand: 41 34 27;
+    --color-linen: 30 25 20;
+    --color-ink: 240 230 214;
+    --color-ink-soft: 214 201 181;
+    --color-ink-muted: 163 146 125;
+    --color-terracotta: 232 104 63;
+    --color-terracotta-dark: 240 138 102;
+    --color-terracotta-light: 74 42 28;
+    --color-band: 232 104 63;
+    --color-on-band: 21 17 13;
     --shadow-soft: 0 4px 24px -8px rgb(0 0 0 / 0.5);
-    --shadow-lifted: 0 12px 40px -12px rgb(0 0 0 / 0.65);
+    --shadow-lifted: 0 18px 50px -20px rgb(0 0 0 / 0.7);
+    --grain-opacity: 0.05;
     color-scheme: dark;
   }
 
@@ -39,7 +46,71 @@
     @apply bg-cream font-sans text-ink antialiased;
   }
 
+  /* Зерно бумаги: статичный SVG-шум поверх страницы, без canvas и анимации */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-terracotta));
+    outline-offset: 2px;
+  }
+
   ::selection {
     @apply bg-terracotta-light text-ink;
+  }
+}
+
+@layer components {
+  .wrap {
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(16px, 4vw, 48px);
+  }
+
+  /* Заголовки: узкий гротеск капсом; одно акцентное слово — курсив Playfair */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 0.9;
+  }
+
+  .display em {
+    font-family: var(--font-playfair);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* Подписи, метки, навигация */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+}
+
+/* Заголовок, который SplitText разобьёт на строки, прячем до разбивки, чтобы он не мигал.
+   Через 2,5 с он появится в любом случае — на случай, если скрипт не загрузился. */
+@media (prefers-reduced-motion: no-preference) {
+  .split-pending {
+    visibility: hidden;
+    animation: split-fallback 0s 2.5s forwards;
+  }
+}
+
+@keyframes split-fallback {
+  to {
+    visibility: visible;
   }
 }
