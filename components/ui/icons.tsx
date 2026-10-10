@@ -28,41 +28,6 @@ export function BagIcon(props: IconProps) {
   );
 }
 
-export function MemoryIcon(props: IconProps) {
-  return (
-    <IconBase {...props}>
-      <path d="M12 3c-3.5 0-6 2.5-6 5.5 0 2 1 3.3 2 4.3.7.7 1 1.5 1 2.4V17h6v-1.8c0-.9.3-1.7 1-2.4 1-1 2-2.3 2-4.3C18 5.5 15.5 3 12 3Z" />
-      <path d="M10 20h4" />
-    </IconBase>
-  );
-}
-
-export function SparkIcon(props: IconProps) {
-  return (
-    <IconBase {...props}>
-      <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6" />
-    </IconBase>
-  );
-}
-
-export function BoxIcon(props: IconProps) {
-  return (
-    <IconBase {...props}>
-      <path d="m3 7 9-4 9 4-9 4-9-4Z" />
-      <path d="M3 7v10l9 4 9-4V7M12 11v10" />
-    </IconBase>
-  );
-}
-
-export function BookIcon(props: IconProps) {
-  return (
-    <IconBase {...props}>
-      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z" />
-      <path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5" />
-    </IconBase>
-  );
-}
-
 export function TrashIcon(props: IconProps) {
   return (
     <IconBase {...props}>

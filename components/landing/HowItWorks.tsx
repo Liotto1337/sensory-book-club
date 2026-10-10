@@ -1,37 +1,35 @@
-import type { ComponentType, SVGProps } from "react";
-import { BoxIcon, BookIcon, MemoryIcon, SparkIcon } from "@/components/ui/icons";
+import { FadeUp } from "@/components/effects/FadeUp";
+import { Tag } from "@/components/ui/Tag";
 
-interface Step {
-  title: string;
-  text: string;
-  Icon: ComponentType<SVGProps<SVGSVGElement>>;
-}
-
-const steps: Step[] = [
-  { title: "Вспомните", text: "Ответьте на 5 вопросов о месте, запахе, звуке и ощущении.", Icon: MemoryIcon },
-  { title: "Получите подбор", text: "Мы найдём 3 атмосферы, которые совпадают с вашим воспоминанием.", Icon: SparkIcon },
-  { title: "Откройте набор", text: "Книга, аромат, плейлист, тактильный предмет и карточка-ритуал.", Icon: BoxIcon },
-  { title: "Читайте всем телом", text: "Следуйте карточке и проживайте историю всеми чувствами.", Icon: BookIcon },
+const steps = [
+  { label: "01 / Тест", title: "Вспомните", text: "Ответьте на 5 вопросов о месте, запахе, звуке и ощущении." },
+  { label: "02 / Подбор", title: "Получите подбор", text: "Мы найдём 3 атмосферы, которые совпадают с вашим воспоминанием." },
+  { label: "03 / Набор", title: "Откройте набор", text: "Книга, аромат, плейлист, тактильный предмет и карточка-ритуал." },
+  { label: "04 / Чтение", title: "Читайте всем телом", text: "Следуйте карточке и проживайте историю всеми чувствами." },
 ];
 
 export function HowItWorks() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-      <h2 className="text-center font-serif text-3xl text-ink sm:text-4xl">Как это работает</h2>
-      <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map(({ title, text, Icon }, index) => (
-          <li key={title} className="rounded-card bg-linen p-6 shadow-soft">
-            <div className="flex items-center justify-between">
-              <span className="flex h-12 w-12 items-center justify-center rounded-control bg-terracotta-light text-terracotta-dark">
-                <Icon className="h-6 w-6" />
-              </span>
-              <span className="font-serif text-3xl text-ink/10">0{index + 1}</span>
-            </div>
-            <h3 className="mt-5 font-serif text-xl text-ink">{title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink-soft">{text}</p>
+    // scroll-mt: при переходе по якорю /#how заголовок не прячется под липкой шапкой
+    <section id="how" className="wrap scroll-mt-[68px] pb-[clamp(96px,12vw,160px)]">
+      <div className="mb-[clamp(40px,5vw,64px)] flex flex-col items-center text-center">
+        <Tag>Как это работает</Tag>
+        <h2 className="display mt-5 text-[clamp(38px,5.8vw,88px)] text-ink">
+          От воспоминания <em>до книги</em>
+        </h2>
+      </div>
+      <FadeUp as="ol" className="grid border-l border-t border-ink/15 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((step) => (
+          <li
+            key={step.label}
+            className="flex min-h-[260px] flex-col border-b border-r border-ink/15 p-7 transition-colors duration-300 hover:bg-sand"
+          >
+            <span className="label text-ink-muted">{step.label}</span>
+            <h3 className="mt-16 text-[26px] font-medium leading-tight tracking-tight text-ink">{step.title}</h3>
+            <p className="mt-2.5 text-ink-muted">{step.text}</p>
           </li>
         ))}
-      </ol>
+      </FadeUp>
     </section>
   );
 }
