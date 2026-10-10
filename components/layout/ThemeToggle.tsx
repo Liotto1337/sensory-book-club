@@ -19,7 +19,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       title="Сменить тему"
-      className="flex h-10 w-10 items-center justify-center rounded-full text-ink-soft transition-colors duration-200 hover:bg-sand hover:text-ink"
+      className="flex h-10 w-10 items-center justify-center border border-transparent text-ink-soft transition-colors duration-200 hover:border-ink/20 hover:text-ink"
     >
       <MoonIcon className="h-5 w-5 dark:hidden" />
       <SunIcon className="hidden h-5 w-5 dark:block" />
