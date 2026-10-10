@@ -1,40 +1,52 @@
+import { Parallax } from "@/components/effects/Parallax";
+import { SplitHeading } from "@/components/effects/SplitHeading";
 import { ButtonLink } from "@/components/ui/Button";
 import { ArrowRightIcon } from "@/components/ui/icons";
-
-const floatingScents = ["соль и кедр", "хвоя после дождя", "кофе и старая бумага", "клубника и трава"];
+import { Eyebrow } from "@/components/ui/Tag";
+import { questions } from "@/data/questions";
+import { pluralize } from "@/lib/pluralize";
 
 export function Hero() {
+  const questionCount = `${questions.length} ${pluralize(questions.length, ["вопрос", "вопроса", "вопросов"])}`;
+
   return (
-    <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-terracotta-light blur-3xl" />
-      <div className="pointer-events-none absolute -left-24 bottom-16 h-72 w-72 rounded-full bg-sand blur-3xl" />
-      <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 pb-20 pt-16 text-center sm:px-6 sm:pb-28 sm:pt-24">
-        <p className="text-xs font-medium uppercase tracking-[0.3em] text-terracotta">
-          Сенсорный книжный клуб
-        </p>
-        <h1 className="mt-6 max-w-4xl font-serif text-4xl leading-[1.1] text-ink sm:text-6xl lg:text-7xl">
-          Книга, которая пахнет твоим воспоминанием
-        </h1>
-        <p className="mt-6 max-w-2xl text-base text-ink-soft sm:text-lg">
-          Мы подбираем книги не по жанру, а по ощущениям: запаху моря, шуму дождя, теплу пледа.
-          Расскажите, где и как вы читали свою лучшую книгу, и получите сенсорный набор:
-          книгу, аромат, плейлист и предмет, который можно держать в руках.
-        </p>
-        <ButtonLink href="/test" size="lg" className="mt-10">
-          Пройти сенсорный тест
-          <ArrowRightIcon className="h-4 w-4" />
-        </ButtonLink>
-        <p className="mt-3 text-xs text-ink-muted">5 вопросов · меньше минуты</p>
-        <ul className="mt-12 flex flex-wrap justify-center gap-2">
-          {floatingScents.map((scent) => (
-            <li
-              key={scent}
-              className="rounded-full border border-ink/10 bg-linen/70 px-4 py-1.5 text-sm text-ink-soft"
-            >
-              {scent}
-            </li>
-          ))}
-        </ul>
+    <section
+      id="hero"
+      className="relative flex h-[calc(100svh-68px)] max-h-[980px] min-h-[600px] items-end overflow-hidden bg-[#111] text-white"
+    >
+      <Parallax
+        src="/sets/set-3.jpg"
+        alt="Свечи, открытые книги и вязаный плед у окна"
+        sizes="100vw"
+        priority
+        strength={0.12}
+        className="absolute inset-0"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/5" aria-hidden />
+      <div
+        className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_50%,rgba(0,0,0,0.45)_100%)]"
+        aria-hidden
+      />
+      <div className="wrap relative z-10 w-full pb-[clamp(36px,7vh,80px)]">
+        <Eyebrow onPhoto>Сенсорный тест · {questionCount} · меньше минуты</Eyebrow>
+        <SplitHeading as="h1" className="display mt-6 max-w-[7.2em] text-[clamp(46px,8.4vw,132px)]">
+          Книга, которая <em>пахнет</em> твоим воспоминанием
+        </SplitHeading>
+        <div className="mt-8 flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+          <p className="max-w-[460px] text-white/85 sm:text-lg">
+            Подбираем книги не по жанру, а по ощущениям. Книга, аромат, плейлист и вещь, которую можно держать в
+            руках, — в одном наборе.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <ButtonLink href="/test" size="lg">
+              Пройти тест
+              <ArrowRightIcon className="h-4 w-4" />
+            </ButtonLink>
+            <ButtonLink href="/catalog" size="lg" variant="inverse">
+              Смотреть каталог
+            </ButtonLink>
+          </div>
+        </div>
       </div>
     </section>
   );
