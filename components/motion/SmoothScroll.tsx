@@ -24,6 +24,25 @@ export function SmoothScroll() {
 
   useLenis(() => ScrollTrigger.update());
 
+  // Страница выросла или сжалась уже после загрузки (лента отзывов, шрифты, картинки) — триггеры ниже
+  // сдвинулись, и без пересчёта параллакс замирает на полпути. Пересчитываем с небольшой задержкой.
+  useEffect(() => {
+    let lastHeight = document.body.scrollHeight;
+    let timer: number | undefined;
+    const observer = new ResizeObserver(() => {
+      const height = document.body.scrollHeight;
+      if (height === lastHeight) return;
+      lastHeight = height;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => ScrollTrigger.refresh(), 150);
+    });
+    observer.observe(document.body);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, []);
+
   // После перехода разметка другая — пересчитываем позиции триггеров
   useEffect(() => {
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh());

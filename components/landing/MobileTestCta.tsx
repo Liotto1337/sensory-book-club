@@ -32,7 +32,7 @@ export function MobileTestCta() {
     <div
       aria-hidden={!isVisible}
       className={cn(
-        "fixed inset-x-3 bottom-3 z-30 transition-[transform,opacity] duration-300 sm:hidden",
+        "fixed inset-x-3 bottom-3 z-30 transition-[transform,opacity] duration-300 motion-reduce:transition-none sm:hidden",
         isVisible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[150%] opacity-0",
       )}
     >

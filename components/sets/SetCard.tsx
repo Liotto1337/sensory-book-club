@@ -25,7 +25,7 @@ export function SetCard({ set, showDetails = true }: SetCardProps) {
       <div className="relative overflow-hidden">
         <SetCover set={set} imageClassName={imageClasses} />
         {badge && (
-          <span className="label absolute left-4 top-4 bg-black/35 px-2 py-1 text-white backdrop-blur-sm">{badge}</span>
+          <span className="label absolute left-4 top-4 bg-black/60 px-2 py-1 text-white backdrop-blur-sm">{badge}</span>
         )}
         <span
           className="absolute right-4 top-3 text-2xl text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

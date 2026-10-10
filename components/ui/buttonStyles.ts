@@ -14,7 +14,8 @@ const variantClasses: Record<ButtonVariant, string> = {
   // Поверх фото: светлый контур в обеих темах
   inverse: "border border-white/70 text-white hover:bg-white hover:text-[#1B1510]",
   // Полоса-призыв: чёрная в светлой теме, терракотовая в тёмной — кнопка на ней меняет цвет вместе с ней
-  band: "bg-terracotta text-linen hover:bg-terracotta-dark dark:bg-on-band dark:text-band dark:hover:bg-linen",
+  // В тёмной теме полоса того же цвета, что кольцо фокуса, поэтому кольцо там цвета текста полосы
+  band: "bg-terracotta text-linen hover:bg-terracotta-dark dark:bg-on-band dark:text-band dark:hover:bg-linen dark:focus-visible:ring-on-band dark:focus-visible:ring-offset-band",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

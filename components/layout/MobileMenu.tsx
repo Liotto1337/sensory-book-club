@@ -20,6 +20,7 @@ export function MobileMenu({ open, onClose, returnFocusRef }: MobileMenuProps) {
   const lenis = useLenis();
   const pathname = usePathname();
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const user = useAuthStore((state) => state.user);
   const status = useAuthStore((state) => state.status);
   const logout = useAuthStore((state) => state.logout);
@@ -35,6 +36,25 @@ export function MobileMenu({ open, onClose, returnFocusRef }: MobileMenuProps) {
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
+      if (event.key === "Tab") keepFocusInside(event);
+    };
+    // Меню модальное: Tab и Shift+Tab ходят по кругу внутри, а не уходят на страницу под ним
+    const keepFocusInside = (event: KeyboardEvent) => {
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+      const focusable = dialog.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      const isOutside = !dialog.contains(active);
+      if (event.shiftKey && (active === first || isOutside)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || isOutside)) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     const desktop = window.matchMedia("(min-width: 1024px)");
     const onDesktop = (event: MediaQueryListEvent) => {
@@ -63,6 +83,7 @@ export function MobileMenu({ open, onClose, returnFocusRef }: MobileMenuProps) {
 
   return (
     <div
+      ref={dialogRef}
       id="mobile-menu"
       role="dialog"
       aria-modal="true"
@@ -71,7 +92,7 @@ export function MobileMenu({ open, onClose, returnFocusRef }: MobileMenuProps) {
       className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-cream lg:hidden"
     >
       <div className="wrap flex h-[68px] w-full shrink-0 items-center justify-between border-b border-ink/15">
-        <span className="display text-xl text-ink">
+        <span className="display text-[clamp(15px,5.2vw,20px)] text-ink">
           Сенсорный <em>книжный</em> клуб
         </span>
         <button

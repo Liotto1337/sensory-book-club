@@ -29,7 +29,7 @@ export function Hero() {
       />
       <div className="wrap relative z-10 w-full pb-[clamp(36px,7vh,80px)]">
         <Eyebrow onPhoto>Сенсорный тест · {questionCount} · меньше минуты</Eyebrow>
-        <SplitHeading as="h1" className="display mt-6 max-w-[7.2em] text-[clamp(46px,8.4vw,132px)]">
+        <SplitHeading as="h1" className="display mt-6 max-w-[7.2em] text-[clamp(36px,13vw,46px)] sm:text-[clamp(46px,8.4vw,132px)]">
           Книга, которая <em>пахнет</em> твоим воспоминанием
         </SplitHeading>
         <div className="mt-8 flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">

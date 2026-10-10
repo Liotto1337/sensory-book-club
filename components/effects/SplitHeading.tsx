@@ -3,7 +3,8 @@
 
 import { useRef, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { gsap, MOTION_OK, SplitText, useGSAP } from "@/lib/gsap";
+import { gsap, MOTION_OK, useGSAP } from "@/lib/gsap";
+import { SplitText } from "@/lib/gsap-split";
 
 interface SplitHeadingProps {
   as?: "h1" | "h2";

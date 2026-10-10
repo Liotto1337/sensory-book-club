@@ -55,7 +55,7 @@ export function Footer() {
             ))}
           </FooterColumn>
         </div>
-        <p className="display mt-[clamp(48px,6vw,80px)] whitespace-nowrap text-[clamp(52px,11.2vw,190px)] leading-[0.85] text-ink">
+        <p className="display mt-[clamp(48px,6vw,80px)] whitespace-nowrap text-[clamp(36px,11.2vw,190px)] leading-[0.85] text-ink">
           Сенсорный <em>клуб</em>
         </p>
         <div className="label flex flex-wrap justify-between gap-3 py-7 text-[11px] text-ink-muted">

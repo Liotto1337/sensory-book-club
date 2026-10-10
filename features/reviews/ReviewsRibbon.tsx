@@ -60,6 +60,7 @@ export function ReviewsRibbon() {
   }, [items, updateEdges]);
 
   const scrollByCard = (direction: 1 | -1) => {
+    if ((direction === -1 && edges.atStart) || (direction === 1 && edges.atEnd)) return;
     const list = listRef.current;
     const card = list?.querySelector("li");
     if (!list || !card) return;
@@ -79,16 +80,25 @@ export function ReviewsRibbon() {
           </h2>
         </div>
         <div className="flex gap-2">
+          {/* aria-disabled, а не disabled: отключённая кнопка теряет фокус, и клавиатура «выпадает» в начало страницы */}
           <Button
             variant="secondary"
             size="sm"
             aria-label="Предыдущие отзывы"
-            disabled={edges.atStart}
+            aria-disabled={edges.atStart}
             onClick={() => scrollByCard(-1)}
+            className="aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
           >
             ←
           </Button>
-          <Button variant="secondary" size="sm" aria-label="Следующие отзывы" disabled={edges.atEnd} onClick={() => scrollByCard(1)}>
+          <Button
+            variant="secondary"
+            size="sm"
+            aria-label="Следующие отзывы"
+            aria-disabled={edges.atEnd}
+            onClick={() => scrollByCard(1)}
+            className="aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
+          >
             →
           </Button>
         </div>

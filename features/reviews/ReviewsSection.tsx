@@ -85,7 +85,7 @@ export function ReviewsSection({ setId }: { setId: string }) {
       </div>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_380px]">
-        <div className="order-2 lg:order-1">
+        <div className="order-2 min-w-0 lg:order-1">
           {loadError ? (
             <p className="text-sm text-ink-muted">Не удалось загрузить отзывы: {loadError}</p>
           ) : !data ? (
@@ -148,12 +148,12 @@ function ReviewItem({ review, onEdit, onDelete }: { review: Review; onEdit: () =
   return (
     <li className="border border-ink/15 bg-linen p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center bg-terracotta-light font-display text-lg text-terracotta-dark">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-terracotta-light font-display text-lg text-terracotta-dark">
             {review.authorName.charAt(0).toUpperCase()}
           </span>
-          <div>
-            <p className="font-medium text-ink">
+          <div className="min-w-0">
+            <p className="break-words font-medium text-ink">
               {review.authorName}
               {review.isOwn && <span className="label ml-2 text-terracotta-dark">ваш отзыв</span>}
             </p>
@@ -165,7 +165,7 @@ function ReviewItem({ review, onEdit, onDelete }: { review: Review; onEdit: () =
         </div>
         <StarRating value={review.rating} />
       </div>
-      <p className="mt-3 whitespace-pre-line leading-relaxed text-ink-soft">{review.text}</p>
+      <p className="mt-3 whitespace-pre-line leading-relaxed text-ink-soft [overflow-wrap:anywhere]">{review.text}</p>
       {review.isOwn && (
         <div className="mt-4 flex gap-5">
           <button type="button" onClick={onEdit} className="label text-terracotta-dark hover:underline">

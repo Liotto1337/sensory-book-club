@@ -18,7 +18,10 @@ export function CtaBand() {
             Пройти сенсорный тест
             <ArrowRightIcon className="h-4 w-4" />
           </ButtonLink>
-          <Link href="/catalog" className="label self-start underline underline-offset-4 hover:no-underline">
+          <Link
+            href="/catalog"
+            className="label self-start underline underline-offset-4 hover:no-underline focus-visible:outline-on-band"
+          >
             или выбрать в каталоге
           </Link>
         </div>

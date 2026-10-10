@@ -25,8 +25,8 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink/15 bg-cream">
-      <div className="wrap flex h-[68px] items-center justify-between gap-6">
-        <Link href="/" className="display whitespace-nowrap text-xl text-ink sm:text-[23px]">
+      <div className="wrap flex h-[68px] items-center justify-between gap-3 sm:gap-6">
+        <Link href="/" className="display whitespace-nowrap text-[clamp(15px,5.2vw,23px)] text-ink">
           Сенсорный <em>книжный</em> клуб
         </Link>
         <nav aria-label="Основное меню" className="hidden items-center gap-8 lg:flex">
