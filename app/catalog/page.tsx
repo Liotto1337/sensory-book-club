@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeading } from "@/components/layout/PageHeading";
 import { CatalogView } from "@/features/catalog/CatalogView";
+import { pluralize } from "@/lib/pluralize";
 import { getAllSets } from "@/lib/sets";
 
 export const metadata: Metadata = {
@@ -8,14 +9,21 @@ export const metadata: Metadata = {
 };
 
 export default function CatalogPage() {
+  const sets = getAllSets();
+
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+    <section className="wrap py-12 sm:py-16">
       <PageHeading
         eyebrow="Каталог"
-        title="12 атмосфер для чтения"
+        title={
+          <>
+            Все <em>атмосферы</em>
+          </>
+        }
         description="Выбирайте по месту и времени года. Книга внутри каждого набора — сюрприз до открытия карточки."
+        aside={`${sets.length} ${pluralize(sets.length, ["набор", "набора", "наборов"])}`}
       />
-      <CatalogView sets={getAllSets()} />
+      <CatalogView sets={sets} />
     </section>
   );
 }

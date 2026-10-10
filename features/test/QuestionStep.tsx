@@ -11,10 +11,10 @@ export function QuestionStep({ question, selectedOptionId, onSelect }: QuestionS
   return (
     <fieldset>
       <legend className="w-full text-center">
-        <span className="block font-serif text-2xl leading-tight text-ink sm:text-4xl">
+        <span className="display block text-[clamp(36px,5vw,64px)] text-ink">
           {question.title}
         </span>
-        <span className="mt-3 block text-ink-muted">{question.subtitle}</span>
+        <span className="mt-4 block text-lg text-ink-muted">{question.subtitle}</span>
       </legend>
       <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4">
         {question.options.map((option) => (

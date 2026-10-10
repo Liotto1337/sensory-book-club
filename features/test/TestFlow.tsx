@@ -46,7 +46,7 @@ export function TestFlow() {
   };
 
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-10 px-4 py-10 sm:px-6 sm:py-16">
+    <div className="mx-auto flex max-w-4xl flex-col gap-10 px-4 py-10 sm:px-6 sm:py-16">
       <ProgressBar current={stepIndex + 1} total={questions.length} />
       <div className="relative min-h-[460px] overflow-hidden sm:min-h-[340px]">
         <AnimatePresence mode="wait" custom={direction} initial={false}>

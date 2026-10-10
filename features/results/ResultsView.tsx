@@ -23,7 +23,12 @@ export function ResultsView() {
     return (
       <section className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6">
         <PageHeading
-          title="Сначала вспомним вместе"
+          align="center"
+          title={
+            <>
+              Сначала <em>вспомним</em> вместе
+            </>
+          }
           description="Пройдите короткий тест, и мы подберём атмосферы под ваше воспоминание."
         />
         <ButtonLink href="/test" size="lg" className="mt-10">
@@ -34,13 +39,18 @@ export function ResultsView() {
   }
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-20">
+    <section className="wrap py-12 sm:py-20">
       <PageHeading
+        align="center"
         eyebrow="Ваш подбор"
-        title="Мы подобрали для вас 3 атмосферы"
+        title={
+          <>
+            Три <em>атмосферы</em> для вас
+          </>
+        }
         description="Название книги откроется на странице набора. Доверьтесь ощущениям."
       />
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
+      <div className="mt-12 grid gap-5 md:grid-cols-3">
         {results.map((set, index) => (
           <motion.div
             key={set.id}
