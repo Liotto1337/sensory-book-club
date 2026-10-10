@@ -66,19 +66,19 @@ export function ReviewsSection({ setId }: { setId: string }) {
   };
 
   return (
-    <section aria-labelledby="reviews-heading" className="mt-16 border-t border-ink/5 pt-12">
+    <section aria-labelledby="reviews-heading" className="mt-16 border-t border-ink/15 pt-12">
       <div className="flex flex-wrap items-end justify-between gap-4">
-        <h2 id="reviews-heading" className="font-serif text-3xl text-ink">
+        <h2 id="reviews-heading" className="display text-[clamp(38px,5vw,64px)] text-ink">
           Отзывы
         </h2>
         {data && data.summary.count > 0 && data.summary.average !== null && (
-          <p className="flex items-center gap-2 text-sm text-ink-soft">
+          <p className="flex items-center gap-3">
             <StarRating value={data.summary.average} />
-            <span className="font-semibold text-ink">
+            <span className="font-display text-2xl text-ink">
               {data.summary.average.toLocaleString("ru-RU", { maximumFractionDigits: 1 })}
             </span>
-            <span>
-              · {data.summary.count} {pluralize(data.summary.count, ["отзыв", "отзыва", "отзывов"])}
+            <span className="label text-ink-muted">
+              {data.summary.count} {pluralize(data.summary.count, ["отзыв", "отзыва", "отзывов"])}
             </span>
           </p>
         )}
@@ -93,7 +93,7 @@ export function ReviewsSection({ setId }: { setId: string }) {
               <Spinner />
             </div>
           ) : data.reviews.length === 0 ? (
-            <p className="rounded-card border border-dashed border-ink/15 p-6 text-center text-ink-muted">
+            <p className="border border-dashed border-ink/25 p-6 text-center text-ink-muted">
               Отзывов пока нет — станьте первым, кто расскажет об этой атмосфере.
             </p>
           ) : (
@@ -108,12 +108,12 @@ export function ReviewsSection({ setId }: { setId: string }) {
         <div className="order-1 lg:order-2">
           {authStatus === "authenticated" ? (
             ownReview && !isEditing ? (
-              <p className="rounded-card bg-linen p-5 text-sm text-ink-soft shadow-soft">
+              <p className="border border-ink/15 bg-linen p-5 text-sm text-ink-soft">
                 Вы уже оставили отзыв на этот набор. Его можно изменить или удалить в списке.
               </p>
             ) : (
               <div>
-                <h3 className="mb-3 font-serif text-xl text-ink">{ownReview ? "Изменить отзыв" : "Оставить отзыв"}</h3>
+                <h3 className="label mb-3 text-ink">{ownReview ? "Изменить отзыв" : "Оставить отзыв"}</h3>
                 <ReviewForm
                   key={ownReview?.id ?? "new"}
                   initialRating={ownReview?.rating}
@@ -125,13 +125,13 @@ export function ReviewsSection({ setId }: { setId: string }) {
               </div>
             )
           ) : authStatus === "guest" ? (
-            <div className="rounded-card bg-linen p-5 text-sm text-ink-soft shadow-soft">
+            <div className="border border-ink/15 bg-linen p-5 text-sm text-ink-soft">
               <p>Отзывы могут оставлять зарегистрированные читатели.</p>
               <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
-                <Link href={`/login?next=/set/${setId}`} className="font-medium text-terracotta-dark hover:underline">
+                <Link href={`/login?next=/set/${setId}`} className="label text-terracotta-dark hover:underline">
                   Войти
                 </Link>
-                <Link href={`/register?next=/set/${setId}`} className="font-medium text-terracotta-dark hover:underline">
+                <Link href={`/register?next=/set/${setId}`} className="label text-terracotta-dark hover:underline">
                   Зарегистрироваться
                 </Link>
               </p>
@@ -146,18 +146,18 @@ export function ReviewsSection({ setId }: { setId: string }) {
 function ReviewItem({ review, onEdit, onDelete }: { review: Review; onEdit: () => void; onDelete: () => void }) {
   const wasEdited = review.updatedAt - review.createdAt > 60_000;
   return (
-    <li className="rounded-card bg-linen p-5 shadow-soft">
+    <li className="border border-ink/15 bg-linen p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-terracotta-light font-serif text-terracotta-dark">
+          <span className="flex h-9 w-9 items-center justify-center bg-terracotta-light font-display text-lg text-terracotta-dark">
             {review.authorName.charAt(0).toUpperCase()}
           </span>
           <div>
             <p className="font-medium text-ink">
               {review.authorName}
-              {review.isOwn && <span className="ml-2 text-xs font-normal text-terracotta-dark">ваш отзыв</span>}
+              {review.isOwn && <span className="label ml-2 text-terracotta-dark">ваш отзыв</span>}
             </p>
-            <p className="text-xs text-ink-muted">
+            <p className="label mt-0.5 text-ink-muted">
               {dateFormat.format(review.createdAt)}
               {wasEdited && " · изменён"}
             </p>
@@ -167,11 +167,11 @@ function ReviewItem({ review, onEdit, onDelete }: { review: Review; onEdit: () =
       </div>
       <p className="mt-3 whitespace-pre-line leading-relaxed text-ink-soft">{review.text}</p>
       {review.isOwn && (
-        <div className="mt-3 flex gap-4 text-sm">
-          <button type="button" onClick={onEdit} className="text-terracotta-dark hover:underline">
+        <div className="mt-4 flex gap-5">
+          <button type="button" onClick={onEdit} className="label text-terracotta-dark hover:underline">
             Изменить
           </button>
-          <button type="button" onClick={onDelete} className="text-ink-muted hover:text-terracotta-dark hover:underline">
+          <button type="button" onClick={onDelete} className="label text-ink-muted hover:text-terracotta-dark hover:underline">
             Удалить
           </button>
         </div>
