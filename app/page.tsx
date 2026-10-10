@@ -8,6 +8,7 @@ import { ScentMarquee } from "@/components/landing/ScentMarquee";
 import { Statement } from "@/components/landing/Statement";
 import { Stats } from "@/components/landing/Stats";
 import { sets } from "@/data/sets";
+import { ReviewsRibbon } from "@/features/reviews/ReviewsRibbon";
 
 const FEATURED_SET_IDS = ["set-1", "set-4", "set-11"];
 
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Stats />
       <HowItWorks />
       <FeaturedSets sets={featuredSets} />
+      <ReviewsRibbon />
       <Statement />
       <CtaBand />
       <MobileTestCta />
