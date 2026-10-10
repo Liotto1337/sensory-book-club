@@ -21,21 +21,24 @@ SQLite хранится в файле, поэтому нужен сервер с
 
 ## Стек
 
-Next.js 14 (App Router, Route Handlers) · TypeScript (strict) · Tailwind CSS · Zustand (persist) · Framer Motion · SQLite (better-sqlite3). Каталог наборов статический и лежит в `data/`; пользователи, сессии и отзывы — в SQLite.
+Next.js 14 (App Router, Route Handlers) · TypeScript (strict) · Tailwind CSS · Zustand (persist) · Framer Motion · GSAP (ScrollTrigger, SplitText) · Lenis · SQLite (better-sqlite3). Каталог наборов статический и лежит в `data/`; пользователи, сессии и отзывы — в SQLite.
 
 ## Структура
 
 ```
 app/            страницы (лендинг, test, results, catalog, set/[id], cart, checkout, thanks, login, register)
-app/api/        auth/ (register, login, logout, me), sets/[id]/reviews, address/suggest
-components/     ui/ (Button, Card, Input, PhoneInput, RadioCard, ProgressBar, Spinner, Toaster, icons),
-                layout/ (Header, UserMenu, ThemeToggle, Footer, PageHeading), landing/, sets/
+app/api/        auth/ (register, login, logout, me), sets/[id]/reviews, reviews/latest, address/suggest
+components/     ui/ (Button, Card, Input, PhoneInput, RadioCard, ProgressBar, Spinner, Tag, Toaster, icons),
+                layout/ (Header, MobileMenu, UserMenu, ThemeToggle, Footer, PageHeading),
+                landing/ (Hero, ScentMarquee, Intro, Stats, HowItWorks, FeaturedSets, Statement, CtaBand, MobileTestCta),
+                sets/, effects/ (SplitHeading, RevealText, ScrollVelocity, CountUp, Parallax, FadeUp),
+                motion/ (SmoothScroll)
 features/       test/ (TestFlow, matchSets), results/, catalog/ (фильтры), cart/,
-                checkout/ (форма, AddressInput), auth/ (AuthForm), reviews/
+                checkout/ (форма, AddressInput), auth/ (AuthForm), reviews/ (ReviewsSection, ReviewsRibbon)
 data/           books.ts, sets.ts, questions.ts
 store/          cartStore (localStorage), testStore (sessionStorage), authStore, toastStore
-lib/            цены, номер заказа, маска телефона, валидация, тема, выборки наборов
-lib/server/     SQLite (db), пароли, сессии, ограничение попыток входа, HTTP-хелперы
+lib/            цены, номер заказа, маска телефона, валидация, тема, выборки наборов, gsap (плагины)
+lib/server/     SQLite (db), пароли, сессии, ограничение попыток входа, свежие отзывы, HTTP-хелперы
 types/          все TypeScript-типы
 ```
 
@@ -54,6 +57,7 @@ API (`app/api/`):
 | `GET /api/auth/me` | текущий пользователь или `null` |
 | `GET /api/sets/:id/reviews` | отзывы набора и средняя оценка |
 | `POST /api/sets/:id/reviews` · `DELETE …` | создать или обновить свой отзыв, удалить его |
+| `GET /api/reviews/latest` | до 10 свежих отзывов с оценкой 4–5 со всех наборов — для ленты на главной |
 | `POST /api/address/suggest` | прокси к подсказкам DaData; токен остаётся на сервере |
 
 ## Оформление заказа
@@ -64,11 +68,23 @@ API (`app/api/`):
 
 `features/test/matchSets.ts` собирает теги выбранных ответов и считает, сколько тегов каждого набора с ними совпадает. Наборы с совпадением ≥ 2 сортируются по убыванию, берутся первые 3, недостающие места заполняются случайными наборами. При равном счёте порядок случайный.
 
+## Дизайн и анимации
+
+Стиль «тёплая редакция»: журнальная типографика и сетка из тонких рамок по мотивам [Club Athletic](https://clubathletic.co/), тёплая палитра бумаги и терракоты. Спецификация — `docs/superpowers/specs/2026-10-10-redesign-warm-editorial-design.md`.
+
+- **Токены.** Цвета — RGB-каналы в CSS-переменных `app/globals.css` (`:root` и `.dark`), Tailwind читает их по именам `cream`, `linen`, `sand`, `ink`, `terracotta`, `band`. Текст цвета акцента — только `terracotta-dark`: все пары «текст/фон» проходят WCAG AA. Скруглений нет, тени только у всплывающих элементов, поверх страницы — статичное зерно бумаги.
+- **Шрифты** (`next/font`, все с кириллицей): Sofia Sans Condensed — заголовки капсом (`.display`), курсив Playfair Display — одно акцентное слово в `<em>` и названия книг, Golos Text — текст, JetBrains Mono — подписи и кнопки (`.label`). Ширина контента — `.wrap`.
+- **Скролл.** `components/motion/SmoothScroll.tsx` включает Lenis на всём сайте; его кадры ведёт тикер GSAP, а ScrollTrigger обновляется по событию Lenis, поэтому эффекты не отстают от прокрутки. Прокрутку при переходах делает сам Next.
+- **Эффекты** (`components/effects/`) создаются через `useGSAP` и убираются вместе с компонентом. GSAP подключается только из `lib/gsap.ts`. Framer Motion остаётся для анимаций интерфейса: шаги теста, тосты, корзина, фильтр каталога, переход страниц.
+- **Reduced motion.** При `prefers-reduced-motion: reduce` эффекты GSAP не запускаются (`gsap.matchMedia()`), Lenis скроллит без сглаживания, текст и цифры сразу в конечном виде.
+
+Часть эффектов основана на компонентах [React Bits](https://reactbits.dev) (MIT + Commons Clause) и адаптирована под проект: SplitText → `SplitHeading`, ScrollReveal → `RevealText`, ScrollVelocity, CountUp. Источник указан в шапке каждого файла.
+
 ## Заметки
 
 - Плейлисты — встроенные публичные плейлисты Spotify, временная заглушка.
 - Обложки наборов — фотографии с Unsplash в `public/sets/`, подключены через `next/image`; градиент набора служит подложкой, пока фото грузится.
-- Тёмная тема: цвета Tailwind заданы CSS-переменными в `app/globals.css` (`:root` и `.dark`). Переключатель в шапке, выбор хранится в `localStorage`; без выбора сайт следует системной теме. Класс `.dark` ставится инлайн-скриптом до отрисовки (`lib/theme.ts`), поэтому страница не мигает.
+- Тёмная тема: цвета Tailwind заданы CSS-переменными в `app/globals.css` (`:root` и `.dark`); полоса-призыв (`band`) в тёмной теме терракотовая. Переключатель в шапке, выбор хранится в `localStorage`; без выбора сайт следует системной теме. Класс `.dark` ставится инлайн-скриптом до отрисовки (`lib/theme.ts`), поэтому страница не мигает.
 - Оплата имитируется: спиннер на 1,5 с → корзина очищается → `/thanks?order=SBC-XXXXXX`.
 
 ## Фотографии
