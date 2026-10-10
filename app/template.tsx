@@ -6,8 +6,9 @@ import type { ReactNode } from "react";
 export default function Template({ children }: { children: ReactNode }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
+      // Только прозрачность: transform на обёртке сломал бы position: fixed и sticky внутри страницы
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
     >
       {children}

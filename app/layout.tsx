@@ -3,8 +3,10 @@ import { Golos_Text, JetBrains_Mono, Playfair_Display, Sofia_Sans_Condensed } fr
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Toaster } from "@/components/ui/Toaster";
 import { themeInitScript } from "@/lib/theme";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 // Заголовки капсом
@@ -56,6 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="flex min-h-screen flex-col">
+        <SmoothScroll />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
