@@ -10,7 +10,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 interface RouteContext {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 interface ReviewRow {
@@ -50,10 +50,11 @@ function loadReviews(setId: string, currentUserId: number | null): ReviewsRespon
   };
 }
 
-export function GET(_request: Request, { params }: RouteContext) {
-  if (!getSetById(params.id)) return jsonError("Набор не найден", 404);
-  const user = getSessionUser();
-  return NextResponse.json(loadReviews(params.id, user?.id ?? null), {
+export async function GET(_request: Request, { params }: RouteContext) {
+  const { id } = await params;
+  if (!getSetById(id)) return jsonError("Набор не найден", 404);
+  const user = await getSessionUser();
+  return NextResponse.json(loadReviews(id, user?.id ?? null), {
     headers: { "Cache-Control": "no-store" },
   });
 }
@@ -61,8 +62,9 @@ export function GET(_request: Request, { params }: RouteContext) {
 /** Создаёт отзыв или обновляет свой: у пользователя один отзыв на набор. */
 export async function POST(request: Request, { params }: RouteContext) {
   if (!isSameOrigin(request)) return forbiddenOrigin();
-  if (!getSetById(params.id)) return jsonError("Набор не найден", 404);
-  const user = getSessionUser();
+  const { id } = await params;
+  if (!getSetById(id)) return jsonError("Набор не найден", 404);
+  const user = await getSessionUser();
   if (!user) return jsonError("Войдите, чтобы оставить отзыв", 401);
 
   const body = await readJsonObject(request);
@@ -79,16 +81,17 @@ export async function POST(request: Request, { params }: RouteContext) {
        ON CONFLICT (set_id, user_id) DO UPDATE SET
          rating = excluded.rating, text = excluded.text, updated_at = excluded.updated_at`,
     )
-    .run(params.id, user.id, values.rating, values.text.trim(), now, now);
+    .run(id, user.id, values.rating, values.text.trim(), now, now);
 
-  return NextResponse.json(loadReviews(params.id, user.id));
+  return NextResponse.json(loadReviews(id, user.id));
 }
 
-export function DELETE(request: Request, { params }: RouteContext) {
+export async function DELETE(request: Request, { params }: RouteContext) {
   if (!isSameOrigin(request)) return forbiddenOrigin();
-  const user = getSessionUser();
+  const { id } = await params;
+  const user = await getSessionUser();
   if (!user) return jsonError("Войдите, чтобы удалить отзыв", 401);
 
-  getDb().prepare("DELETE FROM reviews WHERE set_id = ? AND user_id = ?").run(params.id, user.id);
-  return NextResponse.json(loadReviews(params.id, user.id));
+  getDb().prepare("DELETE FROM reviews WHERE set_id = ? AND user_id = ?").run(id, user.id);
+  return NextResponse.json(loadReviews(id, user.id));
 }

@@ -21,7 +21,7 @@ SQLite хранится в файле, поэтому нужен сервер с
 
 ## Стек
 
-Next.js 14 (App Router, Route Handlers) · TypeScript (strict) · Tailwind CSS · Zustand (persist) · Framer Motion · GSAP (ScrollTrigger, SplitText) · Lenis · SQLite (better-sqlite3). Каталог наборов статический и лежит в `data/`; пользователи, сессии и отзывы — в SQLite.
+Next.js 16 (App Router, Route Handlers, Turbopack) · React 19 · TypeScript (strict) · Tailwind CSS · Zustand (persist) · Framer Motion · GSAP (ScrollTrigger, SplitText) · Lenis · SQLite (better-sqlite3). Каталог наборов статический и лежит в `data/`; пользователи, сессии и отзывы — в SQLite.
 
 ## Структура
 

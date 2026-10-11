@@ -4,6 +4,6 @@ import { getSessionUser } from "@/lib/server/session";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export function GET() {
-  return NextResponse.json({ user: getSessionUser() }, { headers: { "Cache-Control": "no-store" } });
+export async function GET() {
+  return NextResponse.json({ user: await getSessionUser() }, { headers: { "Cache-Control": "no-store" } });
 }

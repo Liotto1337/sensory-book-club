@@ -23,7 +23,7 @@ interface ScrollVelocityProps {
   className?: string;
 }
 
-function useElementWidth(ref: RefObject<HTMLElement>): number {
+function useElementWidth(ref: RefObject<HTMLElement | null>): number {
   const [width, setWidth] = useState(0);
   useLayoutEffect(() => {
     const element = ref.current;

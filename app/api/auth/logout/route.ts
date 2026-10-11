@@ -5,8 +5,8 @@ import { destroySession } from "@/lib/server/session";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export function POST(request: Request) {
+export async function POST(request: Request) {
   if (!isSameOrigin(request)) return forbiddenOrigin();
-  destroySession();
+  await destroySession();
   return NextResponse.json({ ok: true });
 }

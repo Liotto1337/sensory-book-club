@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     throw error;
   }
 
-  createSession(userId);
+  await createSession(userId);
   const user: SessionUser = { id: userId, name, email };
   return NextResponse.json({ user }, { status: 201 });
 }

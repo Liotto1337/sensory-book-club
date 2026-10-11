@@ -13,20 +13,20 @@ import { formatPrice } from "@/lib/formatPrice";
 import { getSetById } from "@/lib/sets";
 
 interface SetPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export function generateStaticParams() {
   return sets.map((set) => ({ id: set.id }));
 }
 
-export function generateMetadata({ params }: SetPageProps): Metadata {
-  const set = getSetById(params.id);
+export async function generateMetadata({ params }: SetPageProps): Promise<Metadata> {
+  const set = getSetById((await params).id);
   return { title: set ? `${set.atmosphere} — Сенсорный книжный клуб` : "Набор не найден" };
 }
 
-export default function SetPage({ params }: SetPageProps) {
-  const set = getSetById(params.id);
+export default async function SetPage({ params }: SetPageProps) {
+  const set = getSetById((await params).id);
   if (!set) notFound();
 
   return (

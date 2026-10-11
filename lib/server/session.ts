@@ -11,7 +11,7 @@ function hashToken(token: string): string {
   return crypto.createHash("sha256").update(token).digest("hex");
 }
 
-export function createSession(userId: number): void {
+export async function createSession(userId: number): Promise<void> {
   const db = getDb();
   const token = crypto.randomBytes(32).toString("base64url");
   const now = Date.now();
@@ -21,7 +21,7 @@ export function createSession(userId: number): void {
   db.prepare("INSERT INTO sessions (token_hash, user_id, expires_at, created_at) VALUES (?, ?, ?, ?)")
     .run(hashToken(token), userId, expiresAt, now);
 
-  cookies().set(SESSION_COOKIE, token, {
+  (await cookies()).set(SESSION_COOKIE, token, {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -30,8 +30,8 @@ export function createSession(userId: number): void {
   });
 }
 
-export function getSessionUser(): SessionUser | null {
-  const token = cookies().get(SESSION_COOKIE)?.value;
+export async function getSessionUser(): Promise<SessionUser | null> {
+  const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;
   const row = getDb()
     .prepare(
@@ -43,8 +43,9 @@ export function getSessionUser(): SessionUser | null {
   return row ?? null;
 }
 
-export function destroySession(): void {
-  const token = cookies().get(SESSION_COOKIE)?.value;
+export async function destroySession(): Promise<void> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(SESSION_COOKIE)?.value;
   if (token) getDb().prepare("DELETE FROM sessions WHERE token_hash = ?").run(hashToken(token));
-  cookies().delete(SESSION_COOKIE);
+  cookieStore.delete(SESSION_COOKIE);
 }

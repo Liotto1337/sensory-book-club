@@ -13,7 +13,7 @@ import { ThemeToggle } from "./ThemeToggle";
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
-  returnFocusRef: RefObject<HTMLButtonElement>;
+  returnFocusRef: RefObject<HTMLButtonElement | null>;
 }
 
 export function MobileMenu({ open, onClose, returnFocusRef }: MobileMenuProps) {

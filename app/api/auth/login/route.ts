@@ -42,7 +42,7 @@ export async function POST(request: Request) {
   }
 
   clearFailures(email);
-  createSession(row.id);
+  await createSession(row.id);
   const user: SessionUser = { id: row.id, name: row.name, email: row.email };
   return NextResponse.json({ user });
 }
