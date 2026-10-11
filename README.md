@@ -10,7 +10,7 @@ cp .env.example .env.local   # по желанию: токен DaData для п�
 npm run dev                  # http://localhost:3000
 ```
 
-Требуется Node.js ≥ 18.17 (официальная сборка: для better-sqlite3 нужны готовые бинарники; сборка Node из пакетов Ubuntu их не находит). Прочие команды: `npm run build`, `npm start`, `npm run typecheck`.
+Требуется Node.js 22 или 24 (официальная сборка). Для этих версий у better-sqlite3 есть готовые бинарники под Windows, macOS и Linux, так что компилятор C++ не нужен. На других версиях npm пытается собрать модуль из исходников и на Windows падает без Visual Studio с компонентом «Разработка классических приложений на C++». Сборка Node из пакетов Ubuntu готовые бинарники не находит. Прочие команды: `npm run build`, `npm start`, `npm run typecheck`.
 
 Переменные окружения (см. `.env.example`):
 
