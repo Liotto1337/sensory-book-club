@@ -18,7 +18,7 @@ interface DadataSuggestion {
 
 const MISSING_KEY_WARNING =
   "DADATA_API_KEY не задан — подсказки адреса отключены. " +
-  "Добавьте ключ в .env.local (см. .env.example) и перезапустите сервер.";
+  "Задайте ключ в .env или .env.local и перезапустите сервер.";
 let missingKeyWarned = false;
 
 /**
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
   if (!isSameOrigin(request)) return forbiddenOrigin();
   const apiKey = process.env.DADATA_API_KEY;
   if (!apiKey) {
-    // Один раз на процесс: иначе ключ легко потерять при клонировании и не заметить
+    // Один раз на процесс: пропавший ключ заметен в логе, но не засоряет его
     if (!missingKeyWarned) {
       console.warn(MISSING_KEY_WARNING);
       missingKeyWarned = true;
