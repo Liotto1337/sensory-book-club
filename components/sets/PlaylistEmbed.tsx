@@ -13,7 +13,9 @@ export function PlaylistEmbed({ src, title }: PlaylistEmbedProps) {
         height="152"
         loading="lazy"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        className="block border-0"
+        // Документ Spotify светлый по color-scheme. Если iframe унаследует dark от тёмной темы, браузер подложит
+        // под него белый фон, и он проступит в скруглённых углах карточки. Совпадающая схема оставляет фон прозрачным.
+        className="block border-0 [color-scheme:light]"
       />
     </div>
   );
