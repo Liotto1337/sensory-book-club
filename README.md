@@ -19,6 +19,34 @@ npm run dev                  # http://localhost:3000
 
 SQLite хранится в файле, поэтому нужен сервер с постоянным диском (VPS, Docker с томом). На serverless-хостингах вроде Vercel файл не сохраняется между запросами — там понадобится облачная БД.
 
+### Windows
+
+Нужны [Node.js](https://nodejs.org) 22 или 24 LTS (установщик `.msi` с nodejs.org) и [Git](https://git-scm.com/download/win). Галочку «Automatically install the necessary tools» в установщике Node ставить не нужно: компилятор проекту не нужен. Команды для PowerShell:
+
+```powershell
+node -v                                # v22.x или v24.x
+git clone https://github.com/Liotto1337/sensory-book-club.git
+cd sensory-book-club
+npm ci                                 # ставит ровно версии из package-lock.json
+Copy-Item .env.example .env.local      # по желанию: свой ключ DaData или путь к базе
+npm run dev                            # http://localhost:3000, остановить — Ctrl+C
+```
+
+Продакшен-сборка: `npm run build`, затем `npm start`. Если порт 3000 занят: `npm run dev -- -p 3001`. Путь к базе в `.env.local` пишется как обычно, например `DATABASE_PATH=D:\data\sensory-book-club.db`; папка создастся сама.
+
+Обновление: остановите `npm run dev`, выполните `git pull`, затем `npm ci`, если изменился `package-lock.json`.
+
+Если что-то не так:
+
+- **«…npm.ps1, так как выполнение сценариев отключено в этой системе».** PowerShell блокирует скрипт npm. Один раз выполните `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` или запускайте команды в «Командной строке» (cmd).
+- **`gyp ERR!` или «missing any VC++ toolset» при установке.** npm не нашёл готовый бинарник better-sqlite3 для вашей версии Node и пытается собрать его из исходников. Проверьте `node -v`: нужна официальная сборка 22 или 24. Visual Studio ставить не нужно.
+- **`EPERM: operation not permitted` при установке.** Файлы в `node_modules` держит другой процесс: запущенный `npm run dev`, редактор или антивирус. Остановите сервер, закройте редактор и поставьте зависимости заново:
+
+  ```powershell
+  Remove-Item -Recurse -Force node_modules, .next -ErrorAction SilentlyContinue
+  npm ci
+  ```
+
 ## Стек
 
 Next.js 16 (App Router, Route Handlers, Turbopack) · React 19 · TypeScript (strict) · Tailwind CSS · Zustand (persist) · Framer Motion · GSAP (ScrollTrigger, SplitText) · Lenis · SQLite (better-sqlite3). Каталог наборов статический и лежит в `data/`; пользователи, сессии и отзывы — в SQLite.
